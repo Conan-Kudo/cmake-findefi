@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2018 Maxim Radugin <maxim.radugin@gmail.com>
+# SPDX-FileCopyrightText: 2023 Neal Gompa <neal@gompa.dev>
+
 #[=======================================================================[.rst:
 FindEFI
 -------
