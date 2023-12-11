@@ -120,7 +120,7 @@ IF (EFI_FOUND AND GNUEFI_FOUND)
     set(EFI_LDS "${EFI_LIBRARY_DIR}/elf_${EFI_ARCH}_efi.lds")
     set(EFI_CRT_OBJS "${EFI_LIBRARY_DIR}/crt0-efi-${EFI_ARCH}.o")
 
-    set(EFI_C_FLAGS -nostdinc -fno-stack-protector -fshort-wchar -mno-red-zone -mno-mmx -mno-sse)
+    set(EFI_C_FLAGS -nostdinc -ffreestanding -fno-stack-protector -fno-stack-check -fshort-wchar -mno-red-zone -maccumulate-outgoing-args)
     set(EFI_LINKER_FLAGS ${EFI_CRT_OBJS} -Wl,-nostdlib -Wl,-znocombreloc -Wl,-T${EFI_LDS} -Wl,-Bsymbolic -Wl,--no-undefined)
     set(EFI_INCLUDE_DIRS "${EFI_INCLUDE_DIR}/efi"
         "${EFI_INCLUDE_DIR}/efi/protocol"
@@ -157,7 +157,7 @@ function (create_efi_image target out)
         COMMENT "Creating EFI image: ${out}${EFI_OUT_ARCH}.efi"
         COMMAND ${CMAKE_OBJCOPY} -j .text -j .sdata -j .data -j .dynamic
                     -j .dynsym  -j .rel -j .rela -j .reloc
-                    --target=efi-app-${EFI_ARCH}
+                    --target=efi-app-${EFI_ARCH} --subsystem=10
                     $<TARGET_FILE:${target}> ${EFI_IMAGE_FILE})
 
     set_property(TARGET ${target} PROPERTY EFI_IMAGE_FILE ${EFI_IMAGE_FILE})
