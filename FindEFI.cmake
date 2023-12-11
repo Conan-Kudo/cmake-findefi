@@ -1,5 +1,5 @@
 #[=======================================================================[.rst:
-Findefi
+FindEFI
 -------
 
 This module finds the gnuefi and efi libraries on the system.
